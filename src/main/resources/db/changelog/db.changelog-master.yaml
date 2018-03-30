@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: init
+      author: sewell
+      changes:
+        - createTable:
+            tableName: pokemon
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: number
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: species
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: height
+                  type: float
+              - column:
+                  name: weight
+                  type: float
+        - createTable:
+            tableName: pokemon_type
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: pokemon_pokemon_type
+            columns:
+              - column:
+                  name: pokemon_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_pokemon
+                    references: "pokemon(id)"
+                    nullable: false
+              - column:
+                  name: pokemon_type_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_pokemon_type
+                    references: "pokemon_type(id)"
+                    nullable: false
